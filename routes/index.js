@@ -5,7 +5,14 @@ var util = require('util');
 var router = express.Router();
 
 const SPARQL_ENDPOINT = 'http://156.35.95.69:3030/ds/query';
-var SPARQL_REQUEST = '?query=SELECT * WHERE { %s }';
+var RESTAURANTS_QUERY = '?query=PREFIX : <http://schema.org/>' +
+      'SELECT * WHERE {' +
+      '?s :name ?name .' +
+      '?s :priceRange ?priceRange .' +
+      '?s :openingHours ?openingHours .' +
+      '?s :photo ?photo .' +
+      '?photo :url ?photo_url' +
+      ' %s }';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,10 +20,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/filter', function(req, res, next) {
-  var query = '?sub ?pred ?obj .';
-
+  console.log(RESTAURANTS_QUERY);
   var options = {
-    url: SPARQL_ENDPOINT + util.format(SPARQL_REQUEST, query),
+    url: SPARQL_ENDPOINT + util.format(RESTAURANTS_QUERY, ''),
     headers : {
       'Content-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/sparql-results+json'
