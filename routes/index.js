@@ -20,9 +20,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/filter', function(req, res, next) {
-  console.log(RESTAURANTS_QUERY);
+  getRestaurants(req, res, next);
+});
+
+function getRestaurants(req, res, next) {
   var options = {
-    url: SPARQL_ENDPOINT + util.format(RESTAURANTS_QUERY, ''),
+    url: SPARQL_ENDPOINT + util.format(RESTAURANTS_QUERY, createFilters(req)),
     headers : {
       'Content-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/sparql-results+json'
@@ -40,6 +43,22 @@ router.post('/filter', function(req, res, next) {
       res.render('503');
     }
   });
-});
+};
+
+function createFilters(req) {
+  var filters = '';
+  var name = req.body.name;
+  var priceRange = req.body.priceRange;
+  var openingHours = req.body.openingHours;
+
+  if (typeof name !== 'undefined')
+    filters += 'FILTER (contains(lcase(?name), \'' + name.toLowerCase() + '\'))';
+  if (typeof priceRange !== 'undefined')
+    filters += 'FILTER (?priceRange = \'' + priceRange + '\')';
+  if (typeof openingHours !== 'undefined')
+    filters += 'FILTER (contains(?openingHours, \'' + openingHours + '\'))';
+
+  return filters;
+}
 
 module.exports = router;
