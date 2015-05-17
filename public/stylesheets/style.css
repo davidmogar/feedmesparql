@@ -49,7 +49,7 @@ a {
   padding: 0.5em;
 }
 
-input[type="text"] {
+input[type="text"], input[type="tel"], input[type="email"], input[type="number"] {
   border: none;
   border-radius: 2px;
   color: #333;
@@ -161,7 +161,7 @@ label:not(:first-of-type) input[type="checkbox"], label:not(:first-of-type) inpu
   margin-top: 0;
 }
 
-#map-canvas-wrapper {
+#map-canvas-wrapper, .crud-box {
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 2px;
   margin-top: 1em;
@@ -198,4 +198,23 @@ img {
   font-size: 3em;
   margin: 0;
   text-align: center;
+}
+
+.crud-box input:not([type="submit"]) {
+  margin-bottom: 0.3em;
+  text-align: left;
+}
+
+.crud-box label:first-of-type input[type="radio"] {
+  margin-left: 2em;
+}
+
+.crud-box .options {
+  margin-top: 0;
+  text-align: left;
+}
+
+.small-centered {
+  margin: 0 auto;
+  width: 100px !important;
 }
