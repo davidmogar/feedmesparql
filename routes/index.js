@@ -54,7 +54,7 @@ function createFilters(req) {
   var priceRange = req.body.priceRange;
 
   if (typeof name !== 'undefined')
-    filters += 'FILTER (contains(lcase(?name), \'' + name.toLowerCase() + '\') || (lcase(?city) = \'' + name.toLowerCase() + '\'))';
+    filters += 'FILTER (contains(lcase(?name), \'' + name.toLowerCase() + '\') || (contains(lcase(?city),  \'' + name.toLowerCase() + '\')))';
   if (typeof priceRange !== 'undefined')
     filters += 'FILTER (?priceRange = \'' + priceRange + '\')';
   if (typeof openingHours !== 'undefined')
