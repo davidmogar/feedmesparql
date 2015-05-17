@@ -33,6 +33,17 @@ var DETAILS_QUERY = '?query=PREFIX : <http://schema.org/>' +
       '?geo :longitude ?longitude .' +
       '?s :email ?email .' +
       '?s :telephone ?telephone }';
+var REVIEWS_QUERY = '?query=PREFIX : <http://schema.org/>' +
+      'PREFIX dc: <http://purl.org/dc/elements/1.1/>' +
+      'SELECT ?author ?date ?name ?description ?rating WHERE {' +
+      '?s dc:identifier %d .' +
+      '?s :review ?review .' +
+      '?review :author ?author .' +
+      '?review :datePublished ?date .' +
+      '?review :name ?name .' +
+      '?review :description ?description .' +
+      '?review :reviewRating ?reviewRating .' +
+      '?reviewRating :ratingValue ?rating }';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -48,10 +59,28 @@ router.get('/restaurants/:id', function(req, res, next) {
     }
   }
 
-  request(options, function(error, response, body) {
+  request(options, function(error, response1, body1) {
     if (!error) {
-      if (response.statusCode == 200) {
-        res.render('restaurant', { data: JSON.parse(body).results.bindings[0] });
+      if (response1.statusCode == 200) {
+        options = {
+          url: SPARQL_ENDPOINT + util.format(REVIEWS_QUERY, req.params.id),
+          headers : {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/sparql-results+json'
+          }
+        }
+
+        request(options, function(error, response2, body2) {
+          if (!error) {
+            if (response2.statusCode == 200) {
+              res.render('restaurant', { data: JSON.parse(body1).results.bindings[0], reviews: JSON.parse(body2).results.bindings });
+            } else {
+              res.render('500');
+            }
+          } else {
+            res.render('500');
+          }
+        });
       } else {
         res.render('500');
       }

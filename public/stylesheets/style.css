@@ -176,3 +176,26 @@ label:not(:first-of-type) input[type="checkbox"], label:not(:first-of-type) inpu
 img {
   border-radius: 2px;
 }
+
+.review {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  margin-top: 1em;
+  padding: 1em;
+  text-align: left;
+}
+
+.review h2 {
+  margin: 0;
+}
+
+.review span {
+  color: #555;
+  font-size: 0.9em;
+}
+
+.review .col-xs-2 p {
+  font-size: 3em;
+  margin: 0;
+  text-align: center;
+}

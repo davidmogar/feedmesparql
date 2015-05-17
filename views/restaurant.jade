@@ -26,6 +26,16 @@ block content
           li Telephone: #{data.telephone.value}
   #map-canvas-wrapper
     #map-canvas
+  #reviews
+    each review in reviews
+      div.review
+        div.row
+          div.col-xs-10
+            h2= review.name.value
+            span #{review.author.value} - Published on #{review.date.value}
+            p= review.description.value
+          div.col-xs-2
+            p= review.rating.value
 
   script(type='text/javascript').
     function initialize() {
