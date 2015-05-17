@@ -15,10 +15,50 @@ var RESTAURANTS_QUERY = '?query=PREFIX : <http://schema.org/>' +
       '?s :address ?address .' +
       '?address :addressLocality ?city' +
       ' %s }';
+var DETAILS_QUERY = '?query=PREFIX : <http://schema.org/>' +
+      'PREFIX dc: <http://purl.org/dc/elements/1.1/>' +
+      'SELECT ?name ?description ?priceRange ?openingHours ?photo_url ?city ?street ?latitude ?longitude ?email ?telephone WHERE {' +
+      '?s dc:identifier %d .' +
+      '?s :name ?name .' +
+      '?s :description ?description .' +
+      '?s :priceRange ?priceRange .' +
+      '?s :openingHours ?openingHours .' +
+      '?s :photo ?photo .' +
+      '?photo :url ?photo_url .' +
+      '?s :address ?address .' +
+      '?address :addressLocality ?city .' +
+      '?address :streetAddress ?street .' +
+      '?s :geo ?geo .' +
+      '?geo :latitude ?latitude .' +
+      '?geo :longitude ?longitude .' +
+      '?s :email ?email .' +
+      '?s :telephone ?telephone }';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
+});
+
+router.get('/restaurants/:id', function(req, res, next) {
+  var options = {
+    url: SPARQL_ENDPOINT + util.format(DETAILS_QUERY, req.params.id),
+    headers : {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/sparql-results+json'
+    }
+  }
+
+  request(options, function(error, response, body) {
+    if (!error) {
+      if (response.statusCode == 200) {
+        res.render('restaurant', { data: JSON.parse(body).results.bindings[0] });
+      } else {
+        res.render('500');
+      }
+    } else {
+      res.render('500');
+    }
+  });
 });
 
 router.post('/filter', function(req, res, next) {
