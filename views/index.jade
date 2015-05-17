@@ -3,9 +3,9 @@ extends layout
 block content
   #welcome
     h1 Feed me, SPARQL!
-    p Welcome! Are you hungry? Then you are in the right place. Select below the kind of restaurant you are looking for and let us select the bests for you.
+    p Welcome! Are you hungry? Then you are in the right place. Write below the name of the restaurant you are looking for or a city if you prefer it, and we'll show you a list of restaurants. Don't in the mood for typping? Just click search ;)
 
     form(action='/filter', method='post')
-      input(type='text', name='name', autocomplete='off' placeholder='Restaurant name or city')
+      input(type='text', name='name', autofocus='on', autocomplete='off' placeholder='Restaurant name or city')
       input.search-button(type='submit', value='Search')
       div.clear
