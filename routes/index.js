@@ -18,14 +18,20 @@ var RESTAURANTS_QUERY = '?query=PREFIX : <http://schema.org/>' +
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 
 router.post('/filter', function(req, res, next) {
-  getRestaurants(req, res, next);
+  getRestaurants(req, function(error, response) {
+    if (!error) {
+      res.render('restaurants', { data: response });
+    } else {
+      res.render('500');
+    }
+  });
 });
 
-function getRestaurants(req, res, next) {
+function getRestaurants(req, callback) {
   var options = {
     url: SPARQL_ENDPOINT + util.format(RESTAURANTS_QUERY, createFilters(req)),
     headers : {
@@ -37,12 +43,12 @@ function getRestaurants(req, res, next) {
   request(options, function(error, response, body) {
     if (!error) {
       if (response.statusCode == 200) {
-        res.send(body);
+        callback(false, JSON.parse(body).results.bindings);
       } else {
-        res.status(404).json(response)
+        callback(true, response)
       }
     } else {
-      res.render('503');
+      res.render(true);
     }
   });
 };
