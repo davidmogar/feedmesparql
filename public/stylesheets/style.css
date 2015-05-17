@@ -149,3 +149,26 @@ input.search-button {
 label:not(:first-of-type) input[type="checkbox"], label:not(:first-of-type) input[type="radio"] {
   margin-left: 1em;
 }
+
+#restaurant-details {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  padding: 1em;
+  text-align: left;
+}
+
+#restaurant-details h2 {
+  margin-top: 0;
+}
+
+#map-canvas-wrapper {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  margin-top: 1em;
+  padding: 1em;
+}
+
+#map-canvas {
+  border-radius: 2px;
+  height: 15em;
+}
