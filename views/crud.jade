@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  #welcome
+    h1 
+      a(href='/') Admin panel
+    p Use this forms to insert and delete restaurants. And remember, as this is just a demo, there is no data validation. And no, this is not a :wink: :wink: situation. Please don't break anything ;)
+
+  div.crud-box
+    form(action='/crud/insert', method='post')
+      input(type='number', name='id', required='true', min='11', placeholder='Restaurant id')
+      input(type='text', name='name', required='true' placeholder='Restaurant name')
+      input(type='text', name='description', required='true' placeholder='Description')
+      div.row.options
+        label Price range?
+          input(type='radio', name='priceRange', value='$')
+          |  Cheap
+        label
+          input(type='radio', name='priceRange', value='$$')
+          |  Medium
+        label
+          input(type='radio', name='priceRange', value='$$$')
+          |  Expensive
+      input(type='text', name='openingHours', required='true' value='Mo-Tu-We-Th-Fr-Sa-Su 09:00-24:00')
+      input(type='text', name='city', required='true' placeholder='Address locality (eg. Barcelona)')
+      input(type='text', name='code', required='true' placeholder='Postal code')
+      input(type='text', name='street', required='true' placeholder='Address')
+      input(type='text', name='latitude', required='true' placeholder='Latitude (eg. 41.388318)')
+      input(type='text', name='longitude', required='true' placeholder='Longitude (eg. 2.1629243)')
+      input(type='email', name='email', required='true' placeholder='Email address')
+      input(type='tel', name='telephone', required='true' placeholder='Telephone')
+      input(type='text', name='photo', required='true' placeholder='Photo url')
+      input.filter-button(type='submit', value='Create')
+      div.clear
+
+  div.crud-box
+    form(action='/crud/delete', method='post')
+      input(type='number', name='id', required='true', min='1', placeholder='Restaurant id')
+      input.filter-button(type='submit', value='Delete')
+      div.clear
