@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  #welcome
+    h1 
+      a(href='/') Feed me, SPARQL!
+    p We have some info for you. Too much or not what you were looking for? Keep filtering. It's free!
+
+  form(action='/filter', method='post')
+    input(type='text', name='name', autocomplete='off' placeholder='Restaurant name or city')
+    div.row.options
+      label
+        input(type='radio', name='priceRange', value='$')
+        |  Cheap
+      label
+        input(type='radio', name='priceRange', value='$$')
+        |  Medium
+      label
+        input(type='radio', name='priceRange', value='$$$')
+        |  Expensive
+    div.row.options
+      label
+        input(type='checkbox', name='openingHours', value='Mo')
+      |  Mo 
+      label
+        input(type='checkbox', name='openingHours', value='Tu')
+        |  Tu
+      label
+        input(type='checkbox', name='openingHours', value='We')
+        |  We
+      label
+        input(type='checkbox', name='openingHours', value='Th')
+        |  Th
+      label
+        input(type='checkbox', name='openingHours', value='Fr')
+        |  Fr
+      label
+        input(type='checkbox', name='openingHours', value='Sa')
+        |  Sa
+      label
+        input(type='checkbox', name='openingHours', value='Su')
+        |  Su
+    input.filter-button(type='submit', value='Filter')
+    div.clear
+
+  #restaurants.row
+    each result in data
+      div.col-md-4.col-sm-6.restaurant-wrapper
+        div.restaurant
+          img.img-responsive(src=result.photo_url.value)
+          h2= result.name.value
+          p Opening hours: #{result.openingHours.value}
+          if result.priceRange.value == '$$$'
+            p Price: expensive
+          else if result.priceRange.value == '$$'
+            p Price: medium
+          else
+            p Price: cheap
+          a.button(href=result.s.value) Visit site

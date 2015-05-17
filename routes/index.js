@@ -48,7 +48,7 @@ function getRestaurants(req, callback) {
         callback(true, response)
       }
     } else {
-      res.render(true);
+      callback(true);
     }
   });
 };
@@ -64,7 +64,7 @@ function createFilters(req) {
   if (typeof priceRange !== 'undefined')
     filters += 'FILTER (?priceRange = \'' + priceRange + '\')';
   if (typeof openingHours !== 'undefined')
-    filters += 'FILTER (contains(?openingHours, \'' + openingHours + '\'))';
+    filters += 'FILTER (' + openingHours.toString().split(',').map(function(obj) { return 'contains(?openingHours, \'' + obj + '\')'; }).join(' || ') + ')';
 
   return filters;
 }

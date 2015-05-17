@@ -10,14 +10,16 @@ html {
 }
 
 body {
+  background-color: transparent;
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   padding: 50px;
   text-align: center;
 }
 
 a {
   color: #00B7FF;
+  text-decoration: none;
 }
 
 #welcome {
@@ -30,6 +32,16 @@ a {
   font-size: 3em;
 }
 
+#welcome h1 a {
+  color: white;
+  font-weight: 300;
+  text-decoration: none;
+}
+
+#welcome h1 a:hover {
+  font-weight: 700;
+}
+
 #welcome form {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 2px;
@@ -37,24 +49,32 @@ a {
   padding: 0.5em;
 }
 
-#welcome input[type="text"] {
+input[type="text"] {
   border: none;
-  border-radius: 2px 0 0 2px;
-  float: left;
+  border-radius: 2px;
+  color: #333;
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
+  margin-bottom: 0.1em;
   outline: none;
   padding: 0.5em 1em;
-  width: calc(100% - 2em - 100px);
+  text-align: center;
+  width: 100%;
 }
 
-#welcome input.search-button {
+#welcome input[type="text"] {
+  border-radius: 2px 0 0 2px;
+  float: left;
+  text-align: left;
+  width: calc(100% - 100px);
+} 
+
+input.search-button {
   background-color: #71be55;
   border: none;
-  border-radius: 0 2px 2px 0;
+  border-radius: 2px;
   color: white;
   cursor: pointer;
-  float: right;
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
   outline: none;
@@ -62,6 +82,70 @@ a {
   width: 100px;
 }
 
+#welcome input.search-button {
+  border-radius: 0 2px 2px 0;
+  float: right;
+}
+
+#restaurants {
+  margin-top: 2em;
+}
+
+.restaurant-wrapper {
+  padding: 1em;
+}
+
+.restaurant {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  padding: 1em;
+}
+
+.button {
+  background-color: #71be55;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #5fa146;
+  color: white;
+  text-decoration: none;
+}
+
 .clear {
   clear: both;
+}
+
+.options {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  margin: 0.2em 0;
+  padding: 0.5em;
+}
+
+.filter-button {
+  background-color: #71be55;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  float: right;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  margin-top: 1em;
+  outline: none;
+  padding: 0.5em 1em;
+  width: 100px;
+}
+
+label:not(:first-of-type) input[type="checkbox"], label:not(:first-of-type) input[type="radio"] {
+  margin-left: 1em;
 }
