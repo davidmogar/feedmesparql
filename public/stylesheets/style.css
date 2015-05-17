@@ -172,3 +172,7 @@ label:not(:first-of-type) input[type="checkbox"], label:not(:first-of-type) inpu
   border-radius: 2px;
   height: 15em;
 }
+
+img {
+  border-radius: 2px;
+}
