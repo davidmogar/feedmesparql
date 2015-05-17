@@ -50,11 +50,11 @@ function getRestaurants(req, res, next) {
 function createFilters(req) {
   var filters = '';
   var name = req.body.name;
-  var priceRange = req.body.priceRange;
   var openingHours = req.body.openingHours;
+  var priceRange = req.body.priceRange;
 
   if (typeof name !== 'undefined')
-    filters += 'FILTER (contains(lcase(?name), \'' + name.toLowerCase() + '\'))';
+    filters += 'FILTER (contains(lcase(?name), \'' + name.toLowerCase() + '\') || (lcase(?city) = \'' + name.toLowerCase() + '\'))';
   if (typeof priceRange !== 'undefined')
     filters += 'FILTER (?priceRange = \'' + priceRange + '\')';
   if (typeof openingHours !== 'undefined')
