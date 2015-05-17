@@ -6,12 +6,14 @@ var router = express.Router();
 
 const SPARQL_ENDPOINT = 'http://156.35.95.69:3030/ds/query';
 var RESTAURANTS_QUERY = '?query=PREFIX : <http://schema.org/>' +
-      'SELECT * WHERE {' +
+      'SELECT ?name ?priceRange ?openingHours ?photo_url ?city WHERE {' +
       '?s :name ?name .' +
       '?s :priceRange ?priceRange .' +
       '?s :openingHours ?openingHours .' +
       '?s :photo ?photo .' +
-      '?photo :url ?photo_url' +
+      '?photo :url ?photo_url .' +
+      '?s :address ?address .' +
+      '?address :addressLocality ?city' +
       ' %s }';
 
 /* GET home page. */
