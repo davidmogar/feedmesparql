@@ -87,6 +87,10 @@ input.search-button {
   float: right;
 }
 
+input.search-button:hover {
+  background-color: #5fa146;
+}
+
 #restaurants {
   margin-top: 2em;
 }
@@ -226,4 +230,22 @@ img {
 #wrapper {
   margin: 0 auto;
   max-width: 800px;
+}
+
+.tag {
+  background-color: #71be55;
+  border-radius: 2px;
+  color: #fff;
+  margin-bottom: 0.3em;
+  padding: 0.2em;
+}
+
+.tag:hover {
+  background-color: #5fa146;
+  color: #fff;
+  text-decoration: none;
+}
+
+li > ul > li {
+  margin-bottom: 0.5em;
 }
