@@ -181,6 +181,10 @@ img {
   border-radius: 2px;
 }
 
+.img-responsive {
+  width: 100%;
+}
+
 .review {
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 2px;
@@ -229,7 +233,7 @@ img {
 
 #wrapper {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 600px;
 }
 
 .tag {
