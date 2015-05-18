@@ -21,6 +21,10 @@ block content
             li Price: medium
           else
             li Price: cheap
+          li Menus:
+            ul
+              each menu in menus
+                li <a href='#{menu.menu.value}'>#{menu.name.value}</a> (#{menu.price.value}€)
           li Address: #{data.street.value} (#{data.city.value})
           li Email: #{data.email.value}
           li Telephone: #{data.telephone.value}

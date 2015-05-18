@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  #welcome
+    h1 
+      a(href='/') Feed me, SPARQL!
+    p Wow! Yummy, yummy!
+
+    #wrapper
+      each result in data
+        div.crud-box
+          h2= result.name.value
+          img.img-responsive(src=result.image.value)

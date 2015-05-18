@@ -214,7 +214,16 @@ img {
   text-align: left;
 }
 
+.crud-box h2 {
+  color: #333;
+}
+
 .small-centered {
   margin: 0 auto;
   width: 100px !important;
+}
+
+#wrapper {
+  margin: 0 auto;
+  max-width: 800px;
 }
