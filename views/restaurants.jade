@@ -46,14 +46,25 @@ block content
   #restaurants.row
     each result in data
       div.col-md-4.col-sm-6.restaurant-wrapper
-        div.restaurant
-          img.img-responsive(src=result.photo_url.value)
-          h2= result.name.value
-          p Opening hours: #{result.openingHours.value}
+        div.restaurant(itemscope, itemtype="http://schema.org/Restaurant")
+          img.img-responsive(src=result.photo_url.value, itemprop="photo")
+          h2(itemprop="name")= result.name.value
+          p
+            | Opening hours: 
+            span(itemprop="openingHours") #{result.openingHours.value}
           if result.priceRange.value == '$$$'
-            p Price: expensive
+            p
+              | Price: expensive (
+              span(itemprop="priceRange") $$$
+              | )
           else if result.priceRange.value == '$$'
-            p Price: medium
+            p
+              | Price: medium (
+              span(itemprop="priceRange") $$$
+              | )
           else
-            p Price: cheap
+            p
+              | Price: cheap (
+              span(itemprop="priceRange") $$$
+              | )
           a.button(href=result.s.value) Visit site

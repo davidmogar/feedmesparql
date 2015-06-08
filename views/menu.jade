@@ -7,7 +7,8 @@ block content
     p Wow! Yummy, yummy!
 
     #wrapper
-      each result in data
-        div.crud-box
-          h2= result.name.value
-          img.img-responsive(src=result.image.value)
+      #menu(itemscope, itemtype="http://dbpedia.org/resource/Menu")
+        each result in data
+          div.crud-box(itemprop="item", itemscope, itemtype="http://schema.org/ListItem")
+            h2(itemprop="name")= result.name.value
+            img.img-responsive(src=result.image.value, itemprop="image")

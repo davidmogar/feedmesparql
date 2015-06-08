@@ -6,28 +6,48 @@ block content
       a(href='/') Feed me, SPARQL!
     p We have some info for you. Too much or not what you were looking for? Keep filtering. It's free!
 
-  #restaurant-details
+  #restaurant-details(itemscope, itemtype="http://schema.org/Restaurant")
     div.row
       div.col-sm-4
-        img.img-responsive(src=data.photo_url.value)
+        img.img-responsive(src=data.photo_url.value, itemprop="photo")
       div.col-sm-8
-        h2= data.name.value
-        p= data.description.value
+        h2(itemprop="name")= data.name.value
+        p(itemprop="description")= data.description.value
         ul
-          li Opening hours: #{data.openingHours.value}
+          li
+            | Opening hours: 
+            span(itemprop="openingHours") #{data.openingHours.value}
           if data.priceRange.value == '$$$'
-            li Price: expensive
+            li
+              | Price: expensive (
+              span(itemprop="priceRange") $$$
+              | )
           else if data.priceRange.value == '$$'
-            li Price: medium
+            li
+              | Price: medium (
+              span(itemprop="priceRange") $$
+              | )
           else
-            li Price: cheap
+            li
+              | Price: cheap (
+              span(itemprop="priceRange") $
+              | )
           li Menus:
             ul
               each menu in menus
-                li <a class="tag" href='#{menu.menu.value}'>#{menu.name.value} (#{menu.price.value}€)</a>
-          li Address: #{data.street.value} (#{data.city.value})
-          li Email: #{data.email.value}
-          li Telephone: #{data.telephone.value}
+                li(itemscope, itemtype="http://dbpedia.org/resource/Menu") <a class="tag" href='#{menu.menu.value}'><span itemprop="name">#{menu.name.value}</span> (<span itemprop="price">#{menu.price.value}</span>€)</a>
+          li(itemprop="address", itemscope, itemtype="http://schema.org/PostalAddress")
+            | Address: 
+            span(itemprop="streetAddress") #{data.street.value} 
+            | (
+            span(itemprop="addressLocality") #{data.city.value}
+            | )
+          li
+            | Email: 
+            span(itemprop="email") #{data.email.value}
+          li
+            | Telephone: 
+            span(itemprop="telephone") #{data.telephone.value}
   #map-canvas-wrapper
     #map-canvas
   #reviews
